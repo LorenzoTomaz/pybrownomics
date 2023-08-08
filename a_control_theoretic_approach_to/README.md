@@ -1,6 +1,6 @@
 # Infrastructure-Centric Blockchain Tokenomics Package
 
-This Python package implements the concepts outlined in the research article "A Control Theoretic Approach to Infrastructure-Centric Blockchain Tokenomics" by Oguzhan Akcin, Robert P. Streit, Benjamin Oommen, Sriram Vishwanath, and Sandeep Chinchali.
+This Python package implements the concepts outlined in the research article [A Control Theoretic Approach to Infrastructure-Centric Blockchain Tokenomics](https://arxiv.org/pdf/2210.12881.pdf) by Oguzhan Akcin, Robert P. Streit, Benjamin Oommen, Sriram Vishwanath, and Sandeep Chinchali.
 
 Overview
 The package focuses on designing and simulating token economies for blockchain-based physical infrastructure systems. The main goal is to create a dynamic and adaptable token economy that incentivizes participation while maintaining equilibrium and stability. The package provides a framework for modeling, simulating, and optimizing token economies in infrastructure networks.
