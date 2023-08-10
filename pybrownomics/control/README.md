@@ -18,5 +18,5 @@ The package focuses on designing and simulating token economies for blockchain-b
 To simulate the infrastructure-centric token economy, you can use the token_simulation.py file. It imports the necessary components from the src directory to create a comprehensive simulation of the token economy.
 
 ```shell
-python token_simulation.py
+python simulation.py
 ```

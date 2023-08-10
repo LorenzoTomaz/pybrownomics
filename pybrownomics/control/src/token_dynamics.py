@@ -13,7 +13,7 @@ class TokenPriceEvolution:
         self.volatility = volatility
         self.trend_rate = trend_rate
 
-    def step(self, dt):
+    def step(self, dt) -> float:
         """
         Simulate the token price for a time step dt.
         """
@@ -21,22 +21,6 @@ class TokenPriceEvolution:
         trend_change = self.trend_rate * dt
         self.price += random_change + trend_change
         return self.price
-
-    def evolve(self, current_state, actions):
-        """
-        Compute the evolution of the system's state.
-
-        :param current_state: Current state of the system.
-        :param actions: A tuple containing the actions of the leader and the followers.
-        :return: The updated state of the system.
-        """
-        ut, vt = actions  # Unpack the actions of the leader and followers
-
-        # The dynamics of the system. This is a placeholder and will need to be replaced
-        # with the actual logic for how the state evolves based on the leader's and followers' actions.
-        next_state = current_state + ut - vt  # This is just a simplistic example
-
-        return next_state
 
 
 class ConsumerBehavior:
@@ -49,7 +33,7 @@ class ConsumerBehavior:
         self.population = initial_population
         self.adoption_rate = adoption_rate
 
-    def step(self, dt, token_price):
+    def step(self, dt, token_price) -> float:
         """
         Simulate the change in consumer population for a time step dt,
         possibly based on the current token price.
