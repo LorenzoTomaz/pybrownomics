@@ -5,6 +5,7 @@ description = ""
 authors = ["Lorenzo Alencar Tomaz <lolo.tomaz@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [{ include = "pybrownomics", from = "." }]
 
 [tool.poetry.dependencies]
 python = "3.9.13"
@@ -19,6 +20,7 @@ pytest-mock = "^3.11.1"
 black = "^23.7.0"
 isort = "^5.12.0"
 mypy = "^1.4.1"
+click = "^8.1.6"
 
 [build-system]
 requires = ["poetry-core"]

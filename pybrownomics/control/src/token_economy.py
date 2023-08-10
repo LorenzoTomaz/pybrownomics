@@ -1,7 +1,10 @@
 import numpy as np
 
-from src.game import StackelbergGame
-from .token_dynamics import TokenPriceEvolution, ConsumerBehavior
+from pybrownomics.control.src.game import StackelbergGame
+from pybrownomics.control.src.token_dynamics import (
+    TokenPriceEvolution,
+    ConsumerBehavior,
+)
 
 
 class TokenEconomy:
