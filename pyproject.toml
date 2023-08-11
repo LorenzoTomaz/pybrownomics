@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pybrownomics"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Lorenzo Alencar Tomaz <lolo.tomaz@gmail.com>"]
 license = "MIT"
@@ -8,10 +8,10 @@ readme = "README.md"
 packages = [{ include = "pybrownomics", from = "." }]
 
 [tool.poetry.dependencies]
-python = ">=3.9.13,<3.13"
-numpy = "^1.25.2"
+python = ">=3.8.0,<3.12"
+numpy = "^1.24.2"
 matplotlib = "^3.7.2"
-scipy = "^1.11.1"
+scipy = "^1.10.1"
 pandas = "^2.0.3"
 
 [tool.poetry.group.dev.dependencies]
