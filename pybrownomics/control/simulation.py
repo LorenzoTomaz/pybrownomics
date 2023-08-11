@@ -11,10 +11,13 @@ import matplotlib.pyplot as plt
 
 
 class TokenSimulation(BaseTokenSimulation):
-    def __init__(self, initial_state, economy: TokenEconomy, time_horizon):
+    def __init__(
+        self, initial_state, economy: TokenEconomy, time_horizon, n_simulations
+    ):
         self.current_state = initial_state
         self.economy = economy
         self.time_horizon = time_horizon
+        self.n_simulations = n_simulations
 
     def _generate_metadata(self, states: List[float]) -> Simulation:
         series = create_series(
@@ -26,16 +29,17 @@ class TokenSimulation(BaseTokenSimulation):
             series=[series],
         )
 
-    def run_simulation(self) -> Simulation:
-        states_over_time = [self.current_state]
-
-        for _ in range(self.time_horizon):
-            ut = self.economy.game.solve_moderator(self.current_state)
-            xt_next = self.economy.dynamic.step(ut)
-            states_over_time.append(xt_next)
-            self.current_state = xt_next
-
-        return self._generate_metadata(states=states_over_time)
+    def run_simulation(self) -> List[Simulation]:
+        simulations = []
+        for _ in range(self.n_simulations):
+            states_over_time = [self.current_state]
+            for _ in range(self.time_horizon):
+                ut = self.economy.game.solve_moderator(self.current_state)
+                xt_next = self.economy.dynamic.step(ut)
+                states_over_time.append(xt_next)
+                self.current_state = xt_next
+            simulations.append(self._generate_metadata(states_over_time))
+        return simulations
 
 
 def run_simulation(
@@ -47,7 +51,8 @@ def run_simulation(
     expected_future_price: float = 11.0,
     initial_population: int = 100,
     adoption_rate: float = 0.1,
-) -> Simulation:
+    n_simulations: int = 1,
+) -> List[Simulation]:
     """Run the simulation."""
     token_price_evolution = TokenPriceEvolution(initial_price=10, volatility=5)
 
@@ -68,7 +73,10 @@ def run_simulation(
         game=stackelberg_game,
     )
     simulation = TokenSimulation(
-        initial_state=initial_state, economy=economy, time_horizon=time_horizon
+        initial_state=initial_state,
+        economy=economy,
+        time_horizon=time_horizon,
+        n_simulations=n_simulations,
     )
 
     # Run the simulation

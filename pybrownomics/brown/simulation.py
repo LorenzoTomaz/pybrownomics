@@ -10,7 +10,7 @@ class TokenSimulation(BaseTokenSimulation):
         self,
         period: int = 365,
         agents: int = 1000,
-        times: int = 1,
+        n_simulations: int = 1,
         beta: float = 0.3,
         chi: float = 1.0,
         interest_rate: float = 0.05,
@@ -25,7 +25,7 @@ class TokenSimulation(BaseTokenSimulation):
         self.df = {
             "period": period,
             "agents": agents,
-            "times": times,
+            "n_simulations": n_simulations,
             "beta": beta,
             "chi": chi,
             "interest_rate": interest_rate,
@@ -38,6 +38,7 @@ class TokenSimulation(BaseTokenSimulation):
             },
             "utility": {"mu": utility_mu, "sigma": utility_sigma},
         }
+        self.n_simulations = n_simulations
 
     def _generate_metadata(self, states: List[float]) -> Simulation:
         series = create_series(
@@ -50,11 +51,10 @@ class TokenSimulation(BaseTokenSimulation):
         )
 
     def run_simulation(self) -> List[Simulation]:
-        times = int(self.df["times"])
         period: int = self.df["period"]
-        prices = np.zeros((times, period))
+        prices = np.zeros((self.n_simulations, period))
         simulations = []
-        for i in range(0, times):
+        for i in range(0, self.n_simulations):
             sim = Simulator(self.df)
             # generate productivity
             sim.calc_productivity()
@@ -76,7 +76,7 @@ class TokenSimulation(BaseTokenSimulation):
 def run_simulation(
     period: int = 365,
     agents: int = 1000,
-    times: int = 1,
+    n_simulations: int = 1,
     beta: float = 0.3,
     chi: float = 1.0,
     interest_rate: float = 0.05,
@@ -92,7 +92,7 @@ def run_simulation(
     token_simulation = TokenSimulation(
         period=period,
         agents=agents,
-        times=times,
+        n_simulations=n_simulations,
         beta=beta,
         chi=chi,
         interest_rate=interest_rate,
