@@ -1,4 +1,5 @@
-from typing import TypedDict
+from typing import TypedDict, Union
+import numpy as np
 
 
 class Series(TypedDict):
@@ -17,9 +18,11 @@ class Simulation(TypedDict):
     series: list[Series]
 
 
-def create_series(name: str, description: str, series: list[dict[str, str]]) -> Series:
+def create_series(
+    name: str, description: str, series: Union[list[float], np.ndarray]
+) -> Series:
     """Create a series object."""
-    return Series(name=name, description=description, series=series)
+    return Series(name=name, description=description, series=list(series))
 
 
 def create_simulation(name: str, description: str, series: list[Series]) -> Simulation:
